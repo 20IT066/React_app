@@ -6,7 +6,7 @@ import Footer from "./components/Footer";
 import Container from "react-bootstrap/Container";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MyAlert from "./components/MyAlert";
-import { useState } from "react";
+import React, { useState } from "react";
 
 function App() {
   const [alert, setAlert] = useState(null);
