@@ -1,9 +1,29 @@
 import { faEnvelope, faLock, faSignInAlt, faUndo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useState } from "react";
 import { Button, Card, Container, Form, InputGroup } from "react-bootstrap";
+import { login } from "../services/AuthService";
 
 export default function Login() {
+
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+
+  let textChanged = (event) => {
+    if(event.target.name==="email"){
+      setEmail(event.target.value);
+    } else if(event.taget.name==="password"){
+      setPassword(event.target.value);
+    }
+  }
+
+  let doLogin = (event) => {
+    login(email, password)
+    .then(response=>console.log(response))
+    .catch(error=>console.log(error));
+  }
+
+
   return (
     <Container>
       <div className="row my-4" style={{ justifyContent: "center" }}>
@@ -18,8 +38,10 @@ export default function Login() {
                       <FontAwesomeIcon icon={faEnvelope} />
                     </InputGroup.Text>
                     <Form.Control
+                    name="email" value={email}
                       type="email"
                       placeholder="Enter email"
+                      onChange={textChanged}
                     ></Form.Control>
                   </InputGroup>
                 </Form.Group>
@@ -29,8 +51,10 @@ export default function Login() {
                       <FontAwesomeIcon icon={faLock} />
                     </InputGroup.Text>
                     <Form.Control
+                    name="password" value={password}
                       type="password"
                       placeholder="Enter password"
+                      onChange={textChanged}
                     ></Form.Control>
                   </InputGroup>
                 </Form.Group>
