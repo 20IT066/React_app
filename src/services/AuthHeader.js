@@ -6,7 +6,7 @@ export default function AuthHeader() {
 
     if(user && user.token) {
         return {
-            Authorization: 'Bearer' + user.token
+            Authorization: 'Bearer ' + user.token
         };
     } else {
         return {};

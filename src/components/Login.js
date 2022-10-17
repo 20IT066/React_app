@@ -3,11 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { Button, Card, Container, Form, InputGroup } from "react-bootstrap";
 import { login } from "../services/AuthService";
+import { useNavigate } from "react-router-dom";
 
-export default function Login() {
+export default function Login(props) {
 
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const navigate = useNavigate();
 
   let textChanged = (event) => {
     if(event.target.name==="email"){
@@ -18,8 +20,12 @@ export default function Login() {
   }
 
   let doLogin = (event) => {
+    event.preventDefault();
     login(email, password)
-    .then(response=>console.log(response))
+    .then(response=>{
+      props.showAlert("success", "Log in Success!!!");
+      navigate("/student")
+    })
     .catch(error=>console.log(error));
   }
 

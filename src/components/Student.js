@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Container, Form, Card, Button } from "react-bootstrap";
 import { Navigate, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import AuthHeader from "../services/AuthHeader";
 
 export default function Student(props) {
   const [id, setId] = useState(null);
@@ -15,7 +16,7 @@ export default function Student(props) {
   useEffect(() => {
     if (studentId) {
       axios
-        .get("http://localhost:8080/student/" + studentId)
+        .get("http://localhost:8080/student/" + studentId, {headers: AuthHeader()})
         .then((response) => {
           if (response.data != null) {
             setId(response.data.id);
@@ -47,7 +48,7 @@ export default function Student(props) {
     event.preventDefault();
     
       axios
-        .post("http://localhost:8080/student", student)
+        .post("http://localhost:8080/student", student, {headers: AuthHeader()})
         .then((response) => {
           if (response.data != null) {
             props.showAlert("success", "Record added successfully");
@@ -58,7 +59,7 @@ export default function Student(props) {
 
   let updateStudent = (event) => {
     event.preventDefault();
-    axios.put("http://localhost:8080/student/" + studentId, student).then((response) => {
+    axios.put("http://localhost:8080/student/" + studentId, student, {headers: AuthHeader()}).then((response) => {
       if (response.data != null) {
         props.showAlert("success", "Record updated successfully");
         navigate("/listStudents"); // Navigate to Students List Components
