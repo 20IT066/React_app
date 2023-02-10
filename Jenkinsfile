@@ -1,5 +1,4 @@
 
-
 pipeline {
     agent any
 
@@ -15,8 +14,9 @@ pipeline {
             steps {
                 script {
                     echo "building the application"
+
                     
-                    
+                    sh 'mvn package'
                 }
             }
         }
@@ -26,9 +26,9 @@ pipeline {
                     echo "building the docker image..."
                     //gv.buildImage()
                     withCredentials([usernamePassword(credentialsId: 'docker-hub-pm310', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]){
-                        sh 'docker build -t pm310/react-app:react-2.0 .'
+                        sh 'docker build -t pm310/demo-app:jma-2.0 .'
                         sh 'docker login -u $USERNAME -p $PASSWORD'
-                        sh 'docker push pm310/react-app:react-2.0'
+                        sh 'docker push pm310/demo-app:jma-2.0'
                     }
                 }
             }
