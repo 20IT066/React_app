@@ -23,7 +23,7 @@ export default function Login(props) {
     event.preventDefault();
     login(email, password)
     .then(response=>{
-      props.showAlert("success", "Log in Success!!!");
+      props.showAlert("success", "Log in Successfully!!!");
       navigate("/student")
     })
     .catch(error=>console.log(error));
