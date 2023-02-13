@@ -38,9 +38,11 @@ pipeline {
                 script {
                     echo "deploying the application on ec2"
                     //gv.deployApp()
+                    def dockerstop="docker stop ec2-react"
+                    def dockerdelete="docker rm ec2-react"
                     def dockerCmd="docker run -p 3000:3000 --name ec2-react -d pm310/react-app:ra-2.0"
                     sshagent(['ec2-server-key']) {
-                        sh "ssh -o StrictHostKeyChecking=no ec2-user@54.95.222.132 ${dockerCmd}"
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@54.95.222.132 ${dockerstop} ${dockerdelete} ${dockerCmd}"
                         
                          
                     }
