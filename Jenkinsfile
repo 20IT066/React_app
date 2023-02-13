@@ -29,7 +29,7 @@ pipeline {
                         
                         sh 'docker build -t pm310/react-app:ra-2.0 .'
                         sh 'docker login -u $USERNAME -p $PASSWORD'
-                        sh 'docker push pm310/demo-app:ra-2.0'
+                        sh 'docker push pm310/react-app:ra-2.0'
                     }
                 }
             }
