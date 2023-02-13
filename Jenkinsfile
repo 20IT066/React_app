@@ -26,7 +26,8 @@ pipeline {
                     echo "building the docker image and restart container..."
                     //gv.buildImage()
                     withCredentials([usernamePassword(credentialsId: 'docker-hub-pm310', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]){
-                        
+                        sh 'docker stop ec2-react'
+                        sh 'docker rm ec2-react'
                         sh 'docker build -t pm310/react-app:ra-2.0 .'
                         sh 'docker login -u $USERNAME -p $PASSWORD'
                         sh 'docker push pm310/react-app:ra-2.0'
