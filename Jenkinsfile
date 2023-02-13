@@ -23,7 +23,7 @@ pipeline {
         stage("build image") {
             steps {
                 script {
-                    echo "building the docker image..."
+                    echo "building the docker image and restart container..."
                     //gv.buildImage()
                     withCredentials([usernamePassword(credentialsId: 'docker-hub-pm310', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]){
                         sh 'docker stop ec2-react'
