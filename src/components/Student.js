@@ -16,7 +16,7 @@ export default function Student(props) {
   useEffect(() => {
     if (studentId) {
       axios
-        .get("http://localhost:8080/student/" + studentId, {headers: AuthHeader()})
+        .get("http://localhost:9090/student/" + studentId, {headers: AuthHeader()})
         .then((response) => {
           if (response.data != null) {
             setId(response.data.id);
