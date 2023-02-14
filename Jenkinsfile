@@ -14,6 +14,7 @@ pipeline {
             steps {
                 script {
                     echo "building the react application"
+                    sh 'mvn package'
 
                     
                     
@@ -40,9 +41,11 @@ pipeline {
                     //gv.deployApp()
                    
                     def dockerCmd="docker run -p 3000:3000 --name ec2-react -d pm310/react-app:ra-2.0"
+                    def dockerStop="docker stop ec2-react"
+                    def dockerDelete="docker rm ec2-react"
                     sshagent(['ec2-server-key']) {
-                        sh 'docker stop ec2-react'
-                        sh 'docker rm ec2-react'
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@54.95.222.132 ${dockerStop}"
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@54.95.222.132 ${dockerDelete}"
                         sh "ssh -o StrictHostKeyChecking=no ec2-user@54.95.222.132 ${dockerCmd}"
                         
                          
