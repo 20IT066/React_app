@@ -14,7 +14,7 @@ pipeline {
             steps {
                 script {
                     echo "building the react application"
-                    sh 'mvn package'
+                    
 
                     
                     
