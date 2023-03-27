@@ -16,7 +16,7 @@ pipeline {
             steps {
                 script {
                     echo "building the spring application"
-                    sh 'npm run build'
+                   
                 }
             }
         }
